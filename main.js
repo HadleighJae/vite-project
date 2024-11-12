@@ -111,7 +111,7 @@ earthMesh.position.x = 1110;
 earthMesh.position.y = 0;
 
 marsMesh.position.z = 0;
-marsMesh.position.x = 1065;
+marsMesh.position.x = 1165;
 marsMesh.position.y = 0;
 
 jupiterMesh.position.z = 0;
