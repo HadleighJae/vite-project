@@ -13,6 +13,7 @@ const scene = new THREE.Scene();
 
 //Textures
 const nightTexture = new THREE.TextureLoader().load('images/night_sky.jpg');
+const sunTexture = new THREE.TextureLoader().load('images/sun.jpg');
 const mercuryTexture = new THREE.TextureLoader().load('images/mercury.jpg');
 const venusTexture = new THREE.TextureLoader().load('images/venus.jpg');
 const moonTexture = new THREE.TextureLoader().load('images/moon.jpg');
@@ -33,15 +34,19 @@ const renderer = new THREE.WebGLRenderer({
 
 // Object texture mapping
 
+const sunGeometry = new THREE.SphereGeometry( 1000, 32, 16);
 const mercuryGeometry = new THREE.SphereGeometry( 3.4, 32, 16);
 const venusGeometry = new THREE.SphereGeometry( 8.6, 32, 16);
-const moonGeometry = new THREE.SphereGeometry( 2, 32, 16);
+const moonGeometry = new THREE.SphereGeometry( 2.275, 32, 16);
 const earthGeometry = new THREE.SphereGeometry( 9.1, 32, 16);
 const marsGeometry = new THREE.SphereGeometry( 4.8, 32, 16);
 const jupiterGeometry = new THREE.SphereGeometry( 100, 32, 16);
-const saturnGeometry = new THREE.SphereGeometry( 184, 32, 16);
+const saturnGeometry = new THREE.SphereGeometry( 84, 32, 16);
 const uranusGeometry = new THREE.SphereGeometry( 34, 32, 16);
 const neptuneGeometry = new THREE.SphereGeometry( 33, 32, 16);
+
+const sunMaterial = new THREE.MeshBasicMaterial({map: sunTexture})
+const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
 
 const mercuryMaterial = new THREE.MeshBasicMaterial({map: mercuryTexture})
 const mercuryMesh = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
@@ -76,6 +81,7 @@ const material = new THREE.MeshBasicMaterial( { color: 0xFF6347 } );
 
 const controls = new OrbitControls(camera, renderer.domElement)
 
+scene.add(sunMesh);
 scene.add(mercuryMesh);
 scene.add(venusMesh);
 scene.add(moonMesh);
@@ -85,40 +91,44 @@ scene.add(jupiterMesh);
 scene.add(saturnMesh);
 scene.add(uranusMesh);
 
+sunMesh.position.z = 0;
+sunMesh.position.x = 0;
+sunMesh.position.y = 0;
+
 mercuryMesh.position.z = 0;
-mercuryMesh.position.x = -623;
+mercuryMesh.position.x = 1042;
 mercuryMesh.position.y = 0;
 
 venusMesh.position.z = 0;
-venusMesh.position.x = -590;
+venusMesh.position.x = 1075;
 venusMesh.position.y = 0;
 
 moonMesh.position.z = 0;
-moonMesh.position.x = -575;
+moonMesh.position.x = 1090;
 moonMesh.position.y = 0;
 
 earthMesh.position.z = 0;
-earthMesh.position.x = -555;
+earthMesh.position.x = 1110;
 earthMesh.position.y = 0;
 
 marsMesh.position.z = 0;
-marsMesh.position.x = -500;
+marsMesh.position.x = 1065;
 marsMesh.position.y = 0;
 
 jupiterMesh.position.z = 0;
-jupiterMesh.position.x = -105;
+jupiterMesh.position.x = 1560;
 jupiterMesh.position.y = 0;
 
 saturnMesh.position.z = 0;
-saturnMesh.position.x = 500;
+saturnMesh.position.x = 2000;
 saturnMesh.position.y = 0;
 
 uranusMesh.position.z = 0;
-uranusMesh.position.x = 1500;
+uranusMesh.position.x = 3000;
 uranusMesh.position.y = 0;
 
 neptuneMesh.position.z = 0;
-neptuneMesh.position.x = 2500;
+neptuneMesh.position.x = 4000;
 neptuneMesh.position.y = 0;
 
 // Lights
@@ -138,47 +148,52 @@ renderer.render(scene, camera);
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(1000);
+camera.position.setZ(2000);
 camera.position.setY(0);
-camera.position.setX(400);
+camera.position.setX(1000);
 
 function animate() {
     requestAnimationFrame( animate );
+
+    // rotate sun
+    sunMesh.rotation.x += 0.00;
+    sunMesh.rotation.y += 0.006875;
+
     // rotate mercury
     mercuryMesh.rotation.x += 0.00;
-    mercuryMesh.rotation.y += 0.0105;
+    mercuryMesh.rotation.y += 0.0000108;
 
     // rotate earth
     venusMesh.rotation.x += 0.00;
-    venusMesh.rotation.y += 0.01;
+    venusMesh.rotation.y += 0.000065;
 
     // rotate moon
     moonMesh.rotation.x += 0.00;
-    moonMesh.rotation.y += 0.05;
+    moonMesh.rotation.y += 0.0005;
 
     // rotate earth
     earthMesh.rotation.x += 0.00;
-    earthMesh.rotation.y += 0.016;
+    earthMesh.rotation.y += 0.001574;
 
     // rotate earth
     marsMesh.rotation.x += 0.00;
-    marsMesh.rotation.y += 0.017;
+    marsMesh.rotation.y += 0.000866;
 
     // rotate moon
     jupiterMesh.rotation.x += 0.00;
-    jupiterMesh.rotation.y += 5.832;
+    jupiterMesh.rotation.y += 0.045583;
 
     // rotate earth
     saturnMesh.rotation.x += 0.00;
-    saturnMesh.rotation.y += 1.392;
+    saturnMesh.rotation.y += 0.03684;
 
     // rotate earth
     uranusMesh.rotation.x += 0.00;
-    uranusMesh.rotation.y += 0.0245;
+    uranusMesh.rotation.y += 0.014794;
 
     // rotate earth
     neptuneMesh.rotation.x += 0.00;
-    neptuneMesh.rotation.y += 0.024;
+    neptuneMesh.rotation.y += 0.009719;
 
     renderer.render( scene, camera );
 }
