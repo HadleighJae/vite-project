@@ -1,8 +1,8 @@
 import * as THREE from 'https://cdn.skypack.dev/three@0.128.0/build/three.module.js';
 import { OrbitControls } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/loaders/GLTFLoader.js';
-import {ThreeMFLoader} from "three/addons";
 import './style.css';
+import {ThreeMFLoader} from "three/addons";
 /*import javascriptLogo from './javascript.svg'
 // import viteLogo from 'public.vite.svg'*/
 // import { setupCounter } from '../counter.js'
@@ -79,6 +79,7 @@ const neptuneMesh = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
 
 const material = new THREE.MeshBasicMaterial( { color: 0xFF6347 } );
 
+//lets you move the camera around
 const controls = new OrbitControls(camera, renderer.domElement)
 
 scene.add(sunMesh);
