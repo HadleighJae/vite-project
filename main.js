@@ -4,12 +4,24 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/l
 /*import javascriptLogo from './javascript.svg'
 // import viteLogo from 'public.vite.svg'*/
 // import { setupCounter } from '../counter.js'
+// hoping this works
 
 // Setup
 
 const scene = new THREE.Scene();
 
-//Textures
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+
+// create a new renderer by instating the canvas element in our HTML // file
+const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector('#bg'),});
+
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setSize(window.innerWidth, window.innerHeight);
+camera.position.setZ(50);
+camera.position.setX(-3);
+
 const nightTexture = new THREE.TextureLoader().load('images/night_sky.jpg');
 const sunTexture = new THREE.TextureLoader().load('images/sun.jpg');
 const mercuryTexture = new THREE.TextureLoader().load('images/mercury.jpg');
@@ -22,62 +34,40 @@ const saturnTexture = new THREE.TextureLoader().load('images/saturn.jpg');
 const uranusTexture = new THREE.TextureLoader().load('images/uranus.jpg');
 const neptuneTexture = new THREE.TextureLoader().load('images/neptune.jpg');
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 3000);
-
-
-// create a new renderer by instating the canvas element in our HTML // file
-const renderer = new THREE.WebGLRenderer({
-    canvas: document.querySelector('#bg'),
-});
-
-// Object texture mapping
-
-const sunGeometry = new THREE.SphereGeometry( 1000, 32, 16);
-const mercuryGeometry = new THREE.SphereGeometry( 3.4, 32, 16);
-const venusGeometry = new THREE.SphereGeometry( 8.6, 32, 16);
-const moonGeometry = new THREE.SphereGeometry( 2.275, 32, 16);
-const earthGeometry = new THREE.SphereGeometry( 9.1, 32, 16);
-const marsGeometry = new THREE.SphereGeometry( 4.8, 32, 16);
-const jupiterGeometry = new THREE.SphereGeometry( 100, 32, 16);
-const saturnGeometry = new THREE.SphereGeometry( 84, 32, 16);
-const uranusGeometry = new THREE.SphereGeometry( 34, 32, 16);
-const neptuneGeometry = new THREE.SphereGeometry( 33, 32, 16);
-
-const sunMaterial = new THREE.MeshBasicMaterial({map: sunTexture})
-const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
-
-const mercuryMaterial = new THREE.MeshBasicMaterial({map: mercuryTexture})
-const mercuryMesh = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
-
-const venusMaterial = new THREE.MeshBasicMaterial({map: venusTexture})
-const venusMesh = new THREE.Mesh(venusGeometry, venusMaterial);
-
-const moonMaterial = new THREE.MeshBasicMaterial({map: moonTexture})
-const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
-
-const earthMaterial = new THREE.MeshBasicMaterial({map: earthTexture})
-const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-
-const marsMaterial = new THREE.MeshBasicMaterial({map: marsTexture})
-const marsMesh = new THREE.Mesh(marsGeometry, marsMaterial);
-
-const jupiterMaterial = new THREE.MeshBasicMaterial({map: jupiterTexture})
-const jupiterMesh = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
-
-const saturnMaterial = new THREE.MeshBasicMaterial({map: saturnTexture})
-const saturnMesh = new THREE.Mesh(saturnGeometry, saturnMaterial);
-
-const uranusMaterial = new THREE.MeshBasicMaterial({map: uranusTexture})
-const uranusMesh = new THREE.Mesh(uranusGeometry, uranusMaterial);
-
-const neptuneMaterial = new THREE.MeshBasicMaterial({map: neptuneTexture})
-const neptuneMesh = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
+const sunGeometry = new THREE.SphereGeometry( 10, 32, 50);
+const mercuryGeometry = new THREE.SphereGeometry( 0.034, 32, 50);
+const venusGeometry = new THREE.SphereGeometry( 0.086, 32, 50);
+const moonGeometry = new THREE.SphereGeometry( 0.02275, 32, 50);
+const earthGeometry = new THREE.SphereGeometry( 0.091, 32, 50);
+const marsGeometry = new THREE.SphereGeometry( 0.048, 32, 50);
+const jupiterGeometry = new THREE.SphereGeometry( 1.00, 32, 50);
+const saturnGeometry = new THREE.SphereGeometry( 0.84, 32, 50);
+const uranusGeometry = new THREE.SphereGeometry( 0.34, 32, 50);
+const neptuneGeometry = new THREE.SphereGeometry( 0.33, 32, 50);
 
 //set the color of the basic material in the object parameters `{}`
+const sunMaterial = new THREE.MeshBasicMaterial({map: sunTexture});
+const mercuryMaterial = new THREE.MeshStandardMaterial({map: mercuryTexture});
+const venusMaterial = new THREE.MeshStandardMaterial({map: venusTexture});
+const moonMaterial = new THREE.MeshStandardMaterial({map: moonTexture});
+const earthMaterial = new THREE.MeshStandardMaterial({map: earthTexture});
+const marsMaterial = new THREE.MeshStandardMaterial({map: marsTexture});
+const jupiterMaterial = new THREE.MeshStandardMaterial({map: jupiterTexture});
+const saturnMaterial = new THREE.MeshStandardMaterial({map: saturnTexture});
+const uranusMaterial = new THREE.MeshStandardMaterial({map: uranusTexture});
+const neptuneMaterial = new THREE.MeshStandardMaterial({map: neptuneTexture});
 
-const material = new THREE.MeshBasicMaterial( { color: 0xFF6347 } );
+const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+const mercuryMesh = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
+const venusMesh = new THREE.Mesh(venusGeometry, venusMaterial);
+const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
+const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
+const marsMesh = new THREE.Mesh(marsGeometry, marsMaterial);
+const jupiterMesh = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
+const saturnMesh = new THREE.Mesh(saturnGeometry, saturnMaterial);
+const uranusMesh = new THREE.Mesh(uranusGeometry, uranusMaterial);
+const neptuneMesh = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
 
-//lets you move the camera around
 const controls = new OrbitControls(camera, renderer.domElement)
 
 scene.add(sunMesh);
@@ -95,61 +85,54 @@ sunMesh.position.x = 0;
 sunMesh.position.y = 0;
 
 mercuryMesh.position.z = 0;
-mercuryMesh.position.x = 1042;
+mercuryMesh.position.x = 10.42;
 mercuryMesh.position.y = 0;
 
 venusMesh.position.z = 0;
-venusMesh.position.x = 1075;
+venusMesh.position.x = 10.75;
 venusMesh.position.y = 0;
 
 moonMesh.position.z = 0;
-moonMesh.position.x = 1090;
+moonMesh.position.x = 10.90;
 moonMesh.position.y = 0;
 
 earthMesh.position.z = 0;
-earthMesh.position.x = 1110;
+earthMesh.position.x = 11.10;
 earthMesh.position.y = 0;
 
 marsMesh.position.z = 0;
-marsMesh.position.x = 1165;
+marsMesh.position.x = 11.65;
 marsMesh.position.y = 0;
 
 jupiterMesh.position.z = 0;
-jupiterMesh.position.x = 1560;
+jupiterMesh.position.x = 15.60;
 jupiterMesh.position.y = 0;
 
 saturnMesh.position.z = 0;
-saturnMesh.position.x = 2000;
+saturnMesh.position.x = 20.00;
 saturnMesh.position.y = 0;
 
 uranusMesh.position.z = 0;
-uranusMesh.position.x = 3000;
+uranusMesh.position.x = 30.00;
 uranusMesh.position.y = 0;
 
 neptuneMesh.position.z = 0;
-neptuneMesh.position.x = 4000;
+neptuneMesh.position.x = 40.00;
 neptuneMesh.position.y = 0;
 
 // Lights
-
 const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(0, -10, 10);
+pointLight.power = 10;
+pointLight.position.set(0, 0, 0);
 
 const ambientLight = new THREE.AmbientLight(0xffffff);
-ambientLight.position.set(25, -15, -400);
-
-scene.background = nightTexture;
+ambientLight.intensity = 0.1;
+ambientLight.position.set(0, 0, 0);
 
 scene.add(pointLight);
 scene.add(ambientLight);
 
 renderer.render(scene, camera);
-
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(2000);
-camera.position.setY(0);
-camera.position.setX(1000);
 
 function animate() {
     requestAnimationFrame( animate );
