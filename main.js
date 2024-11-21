@@ -5,6 +5,7 @@ import { GLTFLoader } from 'https://cdn.skypack.dev/three@0.128.0/examples/jsm/l
 // import viteLogo from 'public.vite.svg'*/
 // import { setupCounter } from '../counter.js'
 // hoping this works
+
 // Setup
 
 const scene = new THREE.Scene();
@@ -37,15 +38,23 @@ const neptuneTexture = new THREE.TextureLoader().load('images/neptune.jpg');
 scene.background = nightTexture;
 
 const sunGeometry = new THREE.SphereGeometry( 13.91400, 32, 50);
-const mercuryGeometry = new THREE.SphereGeometry( 0.4879, 32, 50);
-const venusGeometry = new THREE.SphereGeometry( 1.2104, 32, 50);
+// 0.4879, 32, 50
+const mercuryGeometry = new THREE.SphereGeometry( 4.879, 32, 50);
+// 1.2104, 32, 50
+const venusGeometry = new THREE.SphereGeometry( 12.104, 32, 50 );
 const moonGeometry = new THREE.SphereGeometry( 1, 32, 50);
-const earthGeometry = new THREE.SphereGeometry( 1.2756, 32, 50);
-const marsGeometry = new THREE.SphereGeometry( 0.6792, 32, 50);
-const jupiterGeometry = new THREE.SphereGeometry( 14.2984, 32, 50);
-const saturnGeometry = new THREE.SphereGeometry( 12.0536, 32, 50);
-const uranusGeometry = new THREE.SphereGeometry( 5.1118, 32, 50);
-const neptuneGeometry = new THREE.SphereGeometry( 4.9528, 32, 50);
+// 1.2756, 32, 50
+const earthGeometry = new THREE.SphereGeometry( 12.756, 32, 50 );
+// 0.6792, 32, 50
+const marsGeometry = new THREE.SphereGeometry( 6.792, 32, 50);
+// 14.2984, 32, 50
+const jupiterGeometry = new THREE.SphereGeometry( 142.984, 32, 50);
+// 12.0536, 32, 50
+const saturnGeometry = new THREE.SphereGeometry( 120.536, 32, 50);
+// 5.1118, 32, 50
+const uranusGeometry = new THREE.SphereGeometry( 51.118, 32, 50);
+// 4.9528, 32, 50
+const neptuneGeometry = new THREE.SphereGeometry( 49.528, 32, 50);
 
 //set the color of the basic material in the object parameters `{}`
 const sunMaterial = new THREE.MeshBasicMaterial({map: sunTexture});
@@ -106,7 +115,8 @@ const saturnObj = new THREE.Object3D();
 saturnObj.add(saturnMesh);
 scene.add(saturnObj);
 
-const saturnRingGeo = new THREE.RingGeometry(2, 30, 32);
+// 2, 30, 32
+const saturnRingGeo = new THREE.RingGeometry(20, 300, 32);
 const saturnMaterialRing = new THREE.MeshBasicMaterial({map: saturnTextureRing, side: THREE.DoubleSide});
 const saturnMeshRing = new THREE.Mesh(saturnRingGeo, saturnMaterialRing);
 saturnObj.add(saturnMeshRing);
@@ -123,6 +133,8 @@ sunMesh.position.z = 0;
 sunMesh.position.x = 0;
 sunMesh.position.y = 0;
 
+sunMesh.rotation.x = 0.1265364;
+
 mercuryMesh.position.z = 0;
 mercuryMesh.position.x = 57.900000;
 mercuryMesh.position.y = 0;
@@ -130,6 +142,8 @@ mercuryMesh.position.y = 0;
 venusMesh.position.z = 0;
 venusMesh.position.x = 108.200000;
 venusMesh.position.y = 0;
+
+venusMesh.rotation.x = 3.0944688;
 
 moonMesh.position.z = 0;
 moonMesh.position.x = 149.600000;
@@ -139,30 +153,41 @@ earthMesh.position.z = 0;
 earthMesh.position.x = 149.600000;
 earthMesh.position.y = 0;
 
+earthMesh.rotation.x = 0.408407;
+
 marsMesh.position.z = 0;
 marsMesh.position.x = 227.900000;
 marsMesh.position.y = 0;
+
+marsMesh.rotation.x = 0.439823;
 
 jupiterMesh.position.z = 0;
 jupiterMesh.position.x = 778.600000;
 jupiterMesh.position.y = 0;
 
-// put back to 1433.500000
+jupiterMesh.rotation.x = 0.0541052;
+
 saturnMesh.position.z = 0;
 saturnMesh.position.x = 1433.500000;
 saturnMesh.position.y = 0;
 
+saturnMesh.rotation.x = 0.4660029;
+
 saturnMeshRing.position.x = 1433.500000;
 
-saturnMeshRing.rotation.x = 190;
+saturnMeshRing.rotation.x = 2.0367992;
 
 uranusMesh.position.z = 0;
 uranusMesh.position.x = 2872.500000;
 uranusMesh.position.y = 0;
 
+uranusMesh.rotation.x = 1.706932;
+
 neptuneMesh.position.z = 0;
 neptuneMesh.position.x = 4495.100000;
 neptuneMesh.position.y = 0;
+
+neptuneMesh.rotation.x = 0.4939282;
 
 // Lights
 const pointLight = new THREE.PointLight(0xffffff);
@@ -187,7 +212,8 @@ function animate() {
     // rotate mercury
     mercuryMesh.rotation.y += 0.00108;
 
-    // rotate earth
+    // rotate venus
+    // put back to 0.00065
     venusMesh.rotation.y += 0.00065;
 
     // rotate moon
